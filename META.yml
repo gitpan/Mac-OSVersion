@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Mac-OSVersion
-version:             0.10
+version:             0.11
 abstract:            This is what the module does
 license:             perl
 generated_by:        ExtUtils::MakeMaker version 6.36
