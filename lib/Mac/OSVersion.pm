@@ -1,4 +1,3 @@
-# $Id$
 package Mac::OSVersion;
 use strict;
 
@@ -10,7 +9,7 @@ use Carp;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.14';
+$VERSION = '0.14_01';
 
 =head1 NAME
 
@@ -38,8 +37,8 @@ Mac::OSVersion - Get the Mac OS X system version
 	
 =head1 DESCRIPTION
 
-Extract the values for the various OS numbers ( Mac OS X version, build,
-kernel ) using various methods. Methods may use other modules or
+Extract the values for the various OS numbers (Mac OS X version, build,
+kernel) using various methods. Methods may use other modules or
 external programs. So far this only works on the current machine.
 
 =cut
@@ -98,8 +97,10 @@ sub version
 		eval { $class->can( $method ) };
 		
 	my @list = $class->$method;
-	unless( wantarray ) { return join ".", @list[0,1,2] }
-	
+	unless( wantarray ) {
+		return join ".", @list[0,1], (defined($list[2]) ? $list[2] : ());
+		}
+
 	return @list;
 	}
 	
@@ -125,6 +126,7 @@ number.
 	4	Tiger
 	5	Leopard
 	6	Snow Leopard
+	7   Lion
 
 =item minor_version_numbers()
 
@@ -139,7 +141,7 @@ qw(Cheetah Puma ... )
 
 BEGIN {
 my @names = qw( Cheetah Puma Jaguar Panther Tiger Leopard ) ;
-push @names, 'Snow Leopard';
+push @names, 'Snow Leopard', 'Lion';
 
 sub minor_to_name { $names[ $_[1] ] }
 
@@ -347,7 +349,7 @@ sub system_profiler
 	my @list = ();
 
 	if( $output =~ 
-		m/  \s+System\ Version:\ Mac\ OS\ X\ (\d+\.\d+\.\d+)\ \((.*?)\)
+		m/  \s+System\ Version:\ Mac\ OS\ X\ (\d+\.\d+(?:\.\d+)?)\ \((.*?)\)
 			\s+Kernel\ Version:\ Darwin\ (\d+\.\d+\.\d+)
 			/xm )
 
@@ -446,7 +448,7 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2007-2008, brian d foy, All Rights Reserved.
+Copyright (c) 2007-2011, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
