@@ -1,21 +1,19 @@
---- #YAML:1.0
-name:               Mac-OSVersion
-version:            0.14_01
-abstract:           Get the Mac OS X system version
+---
+abstract: 'Get the Mac OS X system version'
 author:
-    - brian d foy <bdfoy@cpan.org>
-license:            perl
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
-build_requires:
-    Test::More:  0
-requires:  {}
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.57_05
+  - 'brian d foy <bdfoy@cpan.org>'
+build_requires: {}
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112150'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Mac-OSVersion
+no_index:
+  directory:
+    - t
+    - inc
+resources:
+  repository: https://github.com/briandfoy/mac-osversion
+version: 0.15
